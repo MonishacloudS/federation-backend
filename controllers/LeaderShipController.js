@@ -194,36 +194,36 @@ const removeLeaders = async (req, res) => {
 
 
 
-// router.post('/create-leader', async (req, res) => {
-//   try {
-//     const { memberId, postingName, district } = req.body;
+const createLeaders = async (req, res) => {
+  try {
+    const { memberId, postingName, district } = req.body;
 
     
-//     const existingLeader = await Application.findOne({ postingName, district, leaderID: { $exists: true } });
+    const existingLeader = await Application.findOne({ postingName, district, leaderID: { $exists: true } });
 
-//     if (existingLeader) {
-//       return res.status(400).json({ error: 'A leader is already present for this postingName and district' });
-//     }
+    if (existingLeader) {
+      return res.status(400).json({ error: 'A leader is already present for this postingName and district' });
+    }
 
    
-//     const application = await leaderShip.findOne({ memberId });
+    const application = await leaderShip.findOne({ memberId });
 
-//     if (!application) {
-//       return res.status(404).json({ error: 'Member not found' });
-//     }
+    if (!application) {
+      return res.status(404).json({ error: 'Member not found' });
+    }
 
   
-//     application.leaderID = memberId;
-//     application.postingName = postingName;
-//     application.district = district;
+    application.leaderID = memberId;
+    application.postingName = postingName;
+    application.district = district;
 
-//     await application.save();
+    await application.save();
 
-//     res.status(200).json({ message: 'Leader created successfully' });
-//   } catch (error) {
-//     res.status(500).json({ error: 'An error occurred while creating the leader' });
-//   }
-// });
+    res.status(200).json({ message: 'Leader created successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while creating the leader' });
+  }
+};
 
 
 
